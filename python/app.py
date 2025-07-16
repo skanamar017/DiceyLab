@@ -71,7 +71,7 @@ class Simulation:
 
 def main():
 
-    print("\nDice Testing\n")
+    print("\nDice() Testing\n")
     craps=Dice(6, 2)
     for i in range(10):
         print(f"Roll {i} for craps is {craps.toss_and_sum()}")
@@ -88,18 +88,20 @@ def main():
 
 
 
-    print("\nBins Testing \n")
+    print("\nBins() Testing \n")
     results = Bins(2, 12)  # for bins from 2..12
+    print(f"Bins at start: {results.bins}")
     for i in range(100):
-        roll=craps.toss_and_sum()
+        roll=craps.toss_and_sum() #from Dice() testing
         results.increment_bin(roll)
     for i in range(len(results.bins)):
         print(f"Bin {i+results.min_bin}'s total is {results.get_bin(i)}")
+    print(f"Bins at end: {results.bins}")
 
 
 
 
-    print("\nSimulation Testing \n")
+    print("\nSimulation() Testing \n")
     
     print("Test 1")
     sim1 = Simulation(6, 2, 20)
