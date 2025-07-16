@@ -34,8 +34,8 @@ class Dice:
 
     def __str__(self):
             if self.rolls==1:
-                return f"Rolled a {self.sides}-sided die 1 time"
-            return f"Rolled a {self.sides}-sided die {self.rolls} time"
+                return f"Rolled a {self.sides}-sided die 1 time\n"
+            return f"Rolled a {self.sides}-sided die {self.rolls} times\n"
 
     def roll(self):
         return random.randrange(1, self.sides+1)
@@ -84,16 +84,17 @@ def main():
     print("\nDice() Testing\n")
     craps=Dice(6, 2)
     for i in range(10):
-        print(f"Roll {i} for craps is {craps.toss_and_sum()}")
+        print(f"Roll {i+1} for craps is {craps.toss_and_sum()}")
         if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls):
-            print(f"Roll {i} is within range\n")
+            print(f"Roll {i+1} is within range\n")
+    print(craps)
     print("\n")
     yatzee=Dice(6, 5)
     for i in range(50):
-        print(f"Roll {i} for yatzee is {yatzee.toss_and_sum()}")
-        if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls):
-            print(f"Roll {i} is within range\n")
-
+        print(f"Roll {i+1} for yatzee is {yatzee.toss_and_sum()}")
+        if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls+1):
+            print(f"Roll {i+1} is within range\n")
+    print(yatzee)
 
 
 
