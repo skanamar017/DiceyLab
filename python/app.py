@@ -79,7 +79,7 @@ def main():
             print(f"Roll {i} is within range\n")
     print("\n")
     yatzee=Dice(6, 5)
-    for i in range(10):
+    for i in range(50):
         print(f"Roll {i} for yatzee is {yatzee.toss_and_sum()}")
         if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls):
             print(f"Roll {i} is within range\n")
