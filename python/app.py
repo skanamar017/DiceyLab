@@ -25,11 +25,12 @@ class Bins:
 
 
 class Dice:
-    def __init__(self, rolls: int):
+    def __init__(self, sides: int, rolls: int):
+        self.sides=sides
         self.rolls=rolls
 
     def roll(self):
-        return random.randrange(1, 7)
+        return random.randrange(1, self.sides+1)
 
     def toss_and_sum(self):
         sum=0
@@ -39,11 +40,13 @@ class Dice:
 
 
 class Simulation:
-    def __init__(self, Dies: int, Tosses: int):
+    def __init__(self, Sides: int, Dies: int, Tosses: int):
+        self.Sides=Sides
         self.Dies=Dies
         self.Tosses=Tosses
-        self.sim_bins=Bins(self.Dies, self.Dies*6)
-        self.die_roll=Dice(Dies)
+
+        self.sim_bins=Bins(self.Dies, self.Dies*self.Sides)
+        self.die_roll=Dice(self.Sides, self.Dies)
 
 
     def run_simulation(self):
@@ -57,7 +60,7 @@ class Simulation:
     def print_results(self):
         results=""
         for index, bin in enumerate(self.sim_bins.bins):
-            results+=f"{index+self.Dies:>3} : {bin:>9}: {round(bin/self.Tosses, 2):<4} {"*"*((bin*100)//self.Tosses)}\n"
+            results+=f"{index+self.Dies:>2} : {bin:>8}: {round(bin/self.Tosses, 2):<4} {"*"*((bin*100)//self.Tosses)}\n"
 
         return results
 
@@ -68,37 +71,49 @@ class Simulation:
 
 def main():
 
-    print("\nDice")
-    craps=Dice(2)
-    craps_toss=craps.toss_and_sum()
-    print(craps_toss)
+    print("\nDice Testing\n")
+    craps=Dice(6, 2)
+    for i in range(10):
+        print(f"Roll {i} for craps is {craps.toss_and_sum()}")
+        if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls):
+            print(f"Roll {i} is within range\n")
+    print("\n")
+    yatzee=Dice(6, 5)
+    for i in range(10):
+        print(f"Roll {i} for yatzee is {yatzee.toss_and_sum()}")
+        if craps.toss_and_sum() in range(craps.rolls, craps.sides*craps.rolls):
+            print(f"Roll {i} is within range\n")
 
-    yatzee=Dice(5)
-    yatzee_toss=yatzee.toss_and_sum()
-    print(yatzee_toss)
 
-    print("\nBins")
+
+
+
+    print("\nBins Testing \n")
     results = Bins(2, 12)  # for bins from 2..12
-    print(results.bins)
-    #results.set_bins()
-    number_of_tens = results.get_bin(10)  # returns the number of tens in the 10 bin
-    results.increment_bin(10)  # should increment bin # 10
-    number_of_tens = results.get_bin(10)
-    print(number_of_tens)
-    print(results.bins)
+    for i in range(100):
+        roll=craps.toss_and_sum()
+        results.increment_bin(roll)
+    for i in range(len(results.bins)):
+        print(f"Bin {i+results.min_bin}'s total is {results.get_bin(i)}")
 
 
 
-    print("\nSimulation")
-    sim = Simulation(3, 1000000)
 
-    finals=sim.run_simulation()
-
-    print(finals.bins)
-
-    printings=sim.print_results()
-
-    print(printings)
+    print("\nSimulation Testing \n")
+    
+    print("Test 1")
+    sim1 = Simulation(6, 2, 20)
+    finals1=sim1.run_simulation()
+    print(finals1.bins)
+    printings1=sim1.print_results()
+    print(printings1)
+    
+    print("Test 2")
+    sim2 = Simulation(8, 3, 1000000)
+    finals2=sim2.run_simulation()
+    print(finals2.bins)
+    printings2=sim2.print_results()
+    print(printings2)
 
 if __name__ == "__main__":
     main()
