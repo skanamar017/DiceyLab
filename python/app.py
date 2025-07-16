@@ -57,6 +57,7 @@ class Simulation:
 
 def main():
 
+    print("\nDice")
     craps=Dice(2)
     craps_toss=craps.toss_and_sum()
     print(craps_toss)
@@ -65,19 +66,19 @@ def main():
     yatzee_toss=yatzee.toss_and_sum()
     print(yatzee_toss)
 
+    print("\nBins")
     results = Bins(2, 12)  # for bins from 2..12
     print(results.bins)
     #results.set_bins()
     number_of_tens = results.get_bin(10)  # returns the number of tens in the 10 bin
-    print(number_of_tens)
     results.increment_bin(10)  # should increment bin # 10
     number_of_tens = results.get_bin(10)
     print(number_of_tens)
     print(results.bins)
 
 
-    print("simulation")
-    sim = Simulation(3, 1000000)
+    print("\nSimulation")
+    sim = Simulation(2, 1000000)
 
     finals=sim.run_simulation()
 
